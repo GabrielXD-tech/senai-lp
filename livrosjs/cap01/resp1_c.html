@@ -1,0 +1,13 @@
+<meta charset="utf-8">
+
+<script>
+
+const valor_Total = Number(prompt("Valor do Produto")); //Valor do Produto
+const n1 = valor_Total * 0.1; //DESCONTO
+const n3 = valor_Total - n1; // Valor Total com o Desconto
+const Parcelas = Number(prompt("Valor de Parcelas")); // N° DE PARCELAS
+const n2 = valor_Total/Parcelas; // VALOR DO PRODUTO PARCELADO
+
+alert (`O Valor total do pagamento à vista será de ${n3} e o valor do produto dividido será ${n2} por parcela`);
+
+</script>
