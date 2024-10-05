@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Programa de Velocidade</h1>
+    <form>
+        <p>
+            Velocidade Permitida:
+            <input type="number" id="inVelocidade" required>
+        </p>
+
+        <p>
+            Velocida atual:
+            <input type="number" id="inVelocidade1" required>
+        </p>
+        <input type="submit" value="Verificar Velocidade">
+    </form>
+    <h2></h2>
+    <script>
+        const frm = document.querySelector("form")
+        const v1 = document.querySelector ("#inVelocidade")
+        const v2 = document.querySelector ("#inVelocidade1")
+        const resp = document.querySelector("h2")
+
+        frm.addEventListener ("submit", (e)=>{
+        e.preventDefault()
+        const valor = Number(frm.inVelocidade1.value)
+
+        if(valor <= v1){
+            resp.innerText = `Sem Multa`
+        }else if (valor <= v1 +(v1 * 0.2)){
+            resp.innerText =`Multa Leve`
+        }
+        else{
+        resp.innerText= "Multa Grave"
+        }
+
+
+        })
+        </script>
+</body>
+</html>

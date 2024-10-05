@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Programa Parquímetro</h1>
+
+    <form>
+        <p>
+            VALOR R$:
+            <input type="number" id="inResposta">
+        </p>
+        <input type="submit" value="Confirmar Depósito">
+    </form>
+
+    <h2></h2>
+    <h3></h3>
+    <script>
+        const frm = document.querySelector("form")
+        const outResp = document.querySelector("h2")
+        const outResp1 = document.querySelector("h3")
+        const p1 = document.querySelector ("inResposta")
+
+        frm.addEventListener ("submit", (e)=>{
+        e.preventDefault()
+        
+        if(inResposta < 1 = 0){
+            outResp.innerText = "Valor Insuficiente"
+        }
+                })
+    </script>
+</body>
+</html>
