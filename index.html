@@ -8,14 +8,34 @@
 <body>
     <h1>Lista de Exemplo e Exercícios</h1>
     <ul>
-        <li><a href="livrosjs/cap01/exe1_1.html">Exemplo 1.1</a></li>
-        <li><a href="livrosjs/cap01/exe1_2.html">Exemplo 1.2</a></li>
-        <li><a href="livrosjs/cap01/exe1_3.html">Exemplo 1.3</a></li>
-        <li><a href="livrosjs/cap01/exe1_4.html">Exemplo 1.4</a></li>
-        <li><a href="livrosjs/cap01/exe1_5.html">Exemplo 1.5</a></li>
-        <li><a href="livrosjs/cap01/exe1_6.html">Exemplo 1.6</a></li>
-        <li><a href="livrosjs/cap01/exe1_7.html">Exemplo 1.7</a></li>
-        <li><a href="livrosjs/cap01/exe1_8.html">Exemplo 1.8</a></li>
+        <script>
+            const arquivos = [
+            "livrosjs/cap01/exe1_2.html",
+            "livrosjs/cap01/exe1_3.html",
+            "livrosjs/cap01/exe1_4.html",
+            "livrosjs/cap01/exe1_5.html",
+            "livrosjs/cap01/exe1_6.html",
+            "livrosjs/cap01/exe1_7.html",
+            "livrosjs/cap01/resp1_7D.html",
+            "livrosjs/cap01/resp1_a.html",
+            "livrosjs/cap01/resp1_b.html",
+            "livrosjs/cap01/resp1_c.html",
+            "livrosjs/cap01/resp1_d.html",
+            "livrosjs/cap02/exe2_1.html",
+            "livrosjs/cap02/exe2_2.html",
+            "livrosjs/cap02/exe2_3.html",
+            "livrosjs/cap02/exe2_4.html",
+            "livrosjs/cap02/exeA.html",
+            "livrosjs/cap02/exeB.html",
+            "livrosjs/cap02/exeC.html",
+            "livrosjs/cap04/exe4_1.html",
+            "teste/teste.html"];            
+            for(let i = 0; i < arquivos.length; i++){
+                document.write(`<li><a href="${arquivos[i]}">${arquivos[i]}</a></li>`)
+            }
+        </script>
+        
     </ul>
 </body>
 </html>
+
