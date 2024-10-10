@@ -28,13 +28,33 @@
             "livrosjs/cap02/exeA.html",
             "livrosjs/cap02/exeB.html",
             "livrosjs/cap02/exeC.html",
-            "livrosjs/cap04/exe4_1.html",
-            "teste/teste.html"];            
+            "livrosjs/cap04/exe4_1.html",         
+            "livrosjs/cap04/exe4_2.html",         
+            "livrosjs/cap04/exe4_3.html",         
+            "livrosjs/cap04/exe_A.html",
+            "livrosjs/cap04/exe_B.html",
+            "livrosjs/cap04/exe_C.html",
+            "livrosjs/cap04/exe_D.html"]
+            let cap = ""
             for(let i = 0; i < arquivos.length; i++){
-                document.write(`<li><a href="${arquivos[i]}">${arquivos[i]}</a></li>`)
+                let url = arquivos[i].split("/")
+                if(cap != url [1]){
+                    cap = url [1]
+                    document.write(`<h3>${cap.replace("cap", "Capitulo")}</h3>`)
+                }
+                let link = arquivos [i]
+                .substring(14)
+                .replace("html","")
+                .replace("exe", "Examplo")
+                .replace("resp", "Resposta")
+                .replace("_",".")
+                document.write(`<li><a href="${arquivos[i]}">${link}</a></li>`)
             }
+
         </script>
         
+
+
     </ul>
 </body>
 </html>
