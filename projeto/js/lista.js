@@ -32,10 +32,11 @@ function atualizarLista(){
     }
     
     function apagar(i) {
-        lista.splice(i,1)
+        if(frm.inId.value != ""){
+        lista.splice(frm.inId.value, 1)
         atualizarLista()
     }
-
+    }
 
     function atualizar(i){
         lista[i] = frm.inItem.value
