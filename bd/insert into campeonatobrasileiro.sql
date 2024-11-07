@@ -168,3 +168,44 @@ América-MG -> Atlético-GO
 Coritiba -> Criciúma
 Goiás    -> Juventude
 */
+select * from time;
+update time set 
+ nome_completo = 'Atlético Clube Goianiense',
+ nome = 'Atlético-GO',
+ sigla = 'ACG',
+ cidade = 'Goiânia',
+ estado = 'GO',
+ id_estadio = 13
+ where id_time = 1;
+
+update time set 
+ nome_completo = 'Criciúma Esporte Clube',
+ nome = 'Criciúma',
+ sigla = 'CRI',
+ cidade = 'Santa Catarina',
+ estado = 'SC',
+ id_estadio = 4
+ where id_time = 7;
+ 
+update time set 
+ nome_completo = 'Esporte Clube Juventude',
+ nome = 'Juventude',
+ sigla = 'JUV',
+ cidade = 'Caxias do Sul',
+ estado = 'RS',
+ id_estadio = 4
+ where id_time = 13;
+ 
+ update time set 
+ nome_completo = 'Esporte Clube Vitória',
+ nome = 'Vitória',
+ sigla = 'VIT',
+ cidade = 'Salvador',
+ estado = 'BA',
+ id_estadio = 7
+ where id_time = 18;
+
+ 
+
+ 
+
