@@ -8,3 +8,6 @@ https://www.hackerrank.com/challenges/asian-population/problem?isFullScreen=true
 SELECT SUM(CITY.POPULATION) FROM CITY INNER JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE WHERE CONTINENT = 'Asia';
 
 https://www.hackerrank.com/challenges/average-population-of-each-continent/problem?isFullScreen=true
+
+SELECT CONTINENT, TRUNCATE(AVG(CITY.POPULATION),0) FROM CITY INNER JOIN COUNTRY ON COUNTRYCODE = CODE
+GROUP BY CONTINENT 
