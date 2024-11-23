@@ -49,15 +49,26 @@ where preco_da_locacao = 0.99;
 
 /*12. Listar a quantidade de filmes por classificação.*/
 
+select classificacao, count(*) from filme group by classificacao;
+
 /*13. Listar, sem repetição, os preços de locação dos filmes cadastrados.*/
+
+select distinct PRECO_DA_LOCACAO from filme; 
 
 /*14. Listar a quantidade de filmes por preço da locação.*/
 
+select preco_da_locacao, count(*) from filme group by preco_da_locacao;
+
 /*15. Listar os precos da locação que possuam mais de 340 filmes.*/
 
-SELECT PRECO_DA_LOCACAO, count(*) AS FILMES FROM FILME group by PRECO_DA_LOCACAO HEVING FILMES > 340;
+SELECT PRECO_DA_LOCACAO, count(*) AS FILMES FROM FILME group by PRECO_DA_LOCACAO having FILMES > 340;
 
 /*16. Listar a quantidade de atores por filme ordenando por quantidade de atores crescente.*/
+
+select titulo, count(*) from filme_ator
+inner join filme on filme.filme_id = filme_ator.filme_id
+group by titulo 
+order by 2 asc;
 
 /*17. Listar a quantidade de atores para os filmes que possuem mais de 5 atores ordenando por quantidade de atores decrescente.*/
 
