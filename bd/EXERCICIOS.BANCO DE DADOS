@@ -123,7 +123,22 @@ group by c.nome;
 
 /*25. Listar a quantidade de filmes classificados como "G" por categoria.*/
 
+SELECT * FROM FILME AS F 
+INNER JOIN FILME_CATEGORIA AS FC ON F.FILME_ID = FC.FILME_ID
+INNER JOIN CATEGORIA AS C ON C.CATEGORIA_ID = FC.CATEGORIA
+GOUP BY C.NOME;
+
 /*26. Listar a quantidade de filmes classificados como "G" OU "PG" por categoria.*/
+
+select c.nome,
+count(*) qt_filme, 
+count(case when classificacao = 'G' then 1 end) qt_G,
+count(case when classificacao = 'PG' then 1 end) qt_PG
+from filme as f
+inner join filme_categoria as fc on fc.categoria_id = f.filme_id
+inner join categoria as c on fc.categoria_id = c.categoria_id
+where classificao in ('G','PG')
+group by c.nome;
 
 /*27. Listar a quantidade de filmes por categoria e classificação.*/
 
