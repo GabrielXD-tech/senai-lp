@@ -100,3 +100,12 @@ order by idade desc;
 select 
 	id_jogador,
     sum(if(descricao like '%Amarelo%', 1, 0))
+
+
+select CONCAT('Entre ',  faixa_etaria,'0 e ',faixa_etaria, '9') as Faixa_Etária, quantidade_jogadores as qt from ( 
+select timestampdiff(year, dt_nascimento, curdate()) div 10 faixa_etaria,
+count(*) as quantidade_jogadores
+from jogador
+where dt_nascimento is not null and posicao not in ('Auxiliar técnico', 'Técnico')
+group by faixa_etaria 
+order by faixa_etaria asc) tb;
