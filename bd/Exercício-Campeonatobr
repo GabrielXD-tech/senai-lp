@@ -101,6 +101,14 @@ select
 	id_jogador,
     sum(if(descricao like '%Amarelo%', 1, 0))
 
+-- 09. Deseja-se saber a quantidade de jogador por faixa etária
+/*exemplo:
+faixa_etaria	qt
+Entre 30 e39	191
+Entre 20 e29	405
+Entre 10 e19	30
+Entre 40 e49	4
+*/
 
 select CONCAT('Entre ',  faixa_etaria,'0 e ',faixa_etaria, '9') as Faixa_Etária, quantidade_jogadores as qt from ( 
 select timestampdiff(year, dt_nascimento, curdate()) div 10 faixa_etaria,
