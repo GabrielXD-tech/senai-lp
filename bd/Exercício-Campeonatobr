@@ -110,6 +110,25 @@ inner join evento as e on j.id_jogador = e.id_jogador
 where descricao like 'cartão%'
 group by numero, nome;
 
+-- 06. Deseja-se saber qual a quantidade de jogos que aconteceram por dia
+/* exemplo:
+dia		quantidade
+sábado	98
+domingo	121
+terça	11
+quarta	64
+quinta	29
+segunda	11
+sexta	8
+*/
+
+select 
+dayname(horario) as Dias, 
+count(*) as qt_dias
+from partida 
+group by dias;
+set lc_time_names=pt_BR;
+
 -- 09. Deseja-se saber a quantidade de jogador por faixa etária
 /*exemplo:
 faixa_etaria	qt
