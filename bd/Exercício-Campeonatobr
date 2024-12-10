@@ -1,5 +1,6 @@
 -- 01. Atualize na tabela evento as descrições 
 -- DE "Substitution" PARA "Substituição"
+
 SET SQL_SAFE_UPDATES=0;
 update evento set descricao = 'Substituição' where descricao = 'Substitution';
 select * from evento where descricao = 'Substituição';
@@ -77,10 +78,12 @@ order by id_partida;
 
 -- 03. Elabore um relatório por minuto e a quantidade de gols (não contar "Gol anulado (Var)")
 -- e ordene pela quantidade do maior para o menor
-select minuto, count(*) quantidade from evento
+
+select minuto, 
+count(*) quantidade from evento
 where descricao like 'Gol%' and descricao not like '%Var%'
 -- descricao in ('Gol (Gol de campo)','Gol (Pênalti)','Gol (Gol Contra)')
-group by minuto
+group by minuto 
 order by quantidade desc;
 
 -- 04. Elabore um relatório por idade e quantidade de jogadores
@@ -97,9 +100,15 @@ order by idade desc;
 -- 05. Elabore um relatório por jogador e quantidade de cartões, 
 -- detalhar também a quantidade de Cartões Vermelho e Amarelo
 -- ordene pela quantidade total de Cartões
-select 
-	id_jogador,
-    sum(if(descricao like '%Amarelo%', 1, 0))
+
+select numero,
+nome,
+sum(if(descricao like '%amarelo%',1,0)) qt_amarelo,
+sum(if(descricao like '%vermelho%',1,0)) qt_vermelho
+from jogador as j 
+inner join evento as e on j.id_jogador = e.id_jogador
+where descricao like 'cartão%'
+group by numero, nome;
 
 -- 09. Deseja-se saber a quantidade de jogador por faixa etária
 /*exemplo:
