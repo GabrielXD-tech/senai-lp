@@ -129,6 +129,29 @@ from partida
 group by dias;
 set lc_time_names=pt_BR;
 
+-- 07. Desejase saber a quantidade total de cada evento 
+-- e quantos aconteceram ate os 45min e depois dos 45min
+/*exemplo:
+descricao									total	ate_45		depois_45
+Gol (Gol de campo)							734		327			407
+Cartão Amarelo								1806	658			1148
+Substituição								3256	112			3144
+Bola na Trave								217		93			124
+Pênalti Perdido								23		12			11
+Cartão Vermelho								80		25			55
+Gol anulado (Var)							39		17			22
+Cartão Vermelho (Segundo Cartão Amarelo)	44		7			37
+Gol (Pênalti)								71		37			34
+Gol (Gol Contra)							14		5			9
+*/
+
+select  descricao, count(*) as total, 
+sum(if(minuto <= 45  ,1,0)) as até_45,
+sum(if(minuto > 45  ,1,0)) as Depois_45 
+from evento
+group by descricao
+order by descricao desc;
+
 -- 09. Deseja-se saber a quantidade de jogador por faixa etária
 /*exemplo:
 faixa_etaria	qt
