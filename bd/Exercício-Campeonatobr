@@ -168,3 +168,20 @@ from jogador
 where dt_nascimento is not null and posicao not in ('Auxiliar técnico', 'Técnico')
 group by faixa_etaria 
 order by faixa_etaria asc) tb;
+
+-- 10. Deseja-se saber o total de gols em cada estádio
+/*exemplo:
+nome_estadio									quantidade
+Mineirão (Estádio Governador Magalhães Pinto)	87
+Morumbi (Estádio Cícero Pompeu de Toledo)		80
+Maracanã										77
+Neo Química Arena								48
+Estádio Alfredo Jaconi							48
+*/
+
+select nome, 
+  sum(gol_mandante + gol_visitante) as quantidade
+  from estadio as e
+  inner join partida as p on e.id_estadio = p.id_estadio
+  group by nome
+  order by quantidade desc;
