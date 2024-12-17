@@ -209,3 +209,35 @@ select nome,
   inner join partida as p on e.id_estadio = p.id_estadio
   group by nome
   order by quantidade desc;
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE gerar_resultado_aleatorio()
+BEGIN
+    DECLARE contador INT DEFAULT 1;
+    DECLARE total_partidas INT DEFAULT 380; 
+    DECLARE gol_mandante INT;
+    DECLARE gol_visitante INT;
+    
+    WHILE contador <= total_partidas DO
+        
+        SET gol_mandante = round(1 + (RAND() * 6));  
+        SET gol_visitante = round(1 + (RAND() * 6));
+
+UPDATE partida 
+SET 
+    gol_mandante = gol_mandante,
+    gol_visitante = gol_visitante
+WHERE
+    id_partida = contador;
+
+        SET contador = contador + 1;
+    END WHILE;
+END$$
+
+DELIMITER ;
+
+CALL gerar_resultado_aleatorio();
+select * from classificacao;
