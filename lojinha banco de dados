@@ -15,7 +15,7 @@ constraint FK_id_cliente foreign key (id_cliente) references cliente(id));
 
 create  table pedido (
 id int,
-pedido date,
+data date,
 id_cliente int, 
 constraint PK_pedido primary key (id),
 constraint FK_pedido_cliente foreign key (id_cliente) references cliente(id));
@@ -104,4 +104,29 @@ insert into pedidoproduto values
 (05,04,05,5);
 select * from pedidoproduto;
 
+select 
+	c.id,
+	nome,
+	email
+from cliente as c
+inner join email_cliente as ec on c.id = id_cliente;
 
+select * from pedido
+where year(data) between 2010 and 2014
+order by data asc;
+
+select * from pedido as p
+inner join cliente as c on p.id_cliente = c.id
+where year(data) between 2015 and 2016;
+
+select distinct nome from categoria 
+where nome like 'f%'
+order by nome desc;
+
+select * from produto as p
+inner join categoria as c on p.id_categoria = c.id
+where nome = 'Vestuário';
+
+select nome, sum(estoque) total from categoria as c
+inner join produto as p on c.id = p.id_categoria
+group by nome;
