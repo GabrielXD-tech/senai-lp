@@ -1,132 +1,39 @@
-create database lojinha;
-use lojinha;
+from flask import Flask , request
+import psycopg2
 
-create table cliente(
-id int,
-nome varchar(100) not null,
-constraint PK_cliente primary key (id));
+app = Flask(__name__)
+@app.route('/')
+def home():
+    return "Olá,Flask"
 
-create table email_cliente(
-id int,
-email varchar(100) not null,
-id_cliente int,
-constraint PK_email_cliente primary key (id),
-constraint FK_id_cliente foreign key (id_cliente) references cliente(id));
-
-create  table pedido (
-id int,
-data date,
-id_cliente int, 
-constraint PK_pedido primary key (id),
-constraint FK_pedido_cliente foreign key (id_cliente) references cliente(id));
-
-create  table produto (
-id int,
-descricao varchar(200) not null,
-id_categoria int,
-id_fornecedor int,
-estoque int,
-constraint PK_produto primary key (id));
-
-create  table categoria (
-id int,
-nome varchar (100) not null,
-constraint PK_categoria primary key (id));
-
-alter table produto
-add constraint FK_produto_categoria foreign key (id_categoria) references categoria(id);
-
-create  table fornecedor (
-id int,
-nome varchar (100) not null,
-constraint PK_fornecedor primary key (id));
-
-alter table produto
-add constraint FK_produto_fornecedor foreign key (id_fornecedor) references fornecedor(id);
-
-create  table pedidoProduto(
-id int,
-id_pedido int,
-id_produto int,
-quantidade int,
-constraint PK_pedidoProduto primary key (id),
-constraint FK_id_pedido foreign key (id_pedido) references pedido(id),
-constraint FK_id_produto foreign key (id_produto) references produto(id));
-
-insert into cliente values
-(1,'Ana'),
-(2,'José'),
-(3,'João');
-select * from cliente;
-
-insert into email_cliente values
-(1,'e1',1),
-(2,'e2',1),
-(3,'e3',2),
-(4,'e4',2),
-(5,'e5',3);
-select * from email_cliente;
-
-insert into pedido values
-(01,'2015-10-05',1),
-(02,'2014-12-31',1),
-(03,'2010-09-10',2),
-(04,'2015-03-14',2),
-(05,'2014-07-21',3);
-select * from pedido;
-
-insert into categoria values
-(1,'Ferramenta'),
-(2,'Vestuário'),
-(3,'Alimento');
-select * from categoria;
-
-insert into fornecedor values
-(01,'F1'),
-(02,'F2'),
-(03,'F3');
-select * from fornecedor;
-
-insert into produto values
-(01,'Alicate',1,1,10),
-(02,'Leite',2,1,100),
-(03,'suco',2,1,50),
-(04,'Camisa',3,2,40),
-(05,'Calça',3,2,20);
-select * from produto;
+@app.route('/item', methods=['POST'])
+def post_item():
+    data = request.get_json()
+    sql = f"INSERT INTO todolist(item, status) VALUES('{data['item']}','{data['status']}')"
+    banco(sql)
+    return data
 
 
-insert into pedidoproduto values
-(01,01,01,10),
-(02,01,02,20),
-(03,02,03,5),
-(04,03,04,10),
-(05,04,05,5);
-select * from pedidoproduto;
+def banco(sql):
+    resultado = ""
+    try:
+        # Conexão com o banco de dados PostgreSQL
+        conn = psycopg2.connect(
+            host = "dpg-cuhul52j1k6c73fe8ar0-a.oregon-postgres.render.com",
+            port = "5432",
+            dbname = "senaidb_fqpt",
+            user = "senaidb_fqpt_user",
+            password = "u8OWJqNktNGE2Ecyyc2BDsmeoID4XKZV"
+        )
+        cursor = conn.cursor() # cursor vai ser a variavel para executar os comandos SQL.
+        print(sql)  
+        cursor.execute(sql) # executa o comando sql seja insert, select .. etc
+        cursor.close() # finaliza o cursor
+        conn.commit()
+        conn.close() # finaliza a conexão
+    except psycopg2.Error as e:
+        print("Erro de conexão do banco de dados")
 
-select 
-	c.id,
-	nome,
-	email
-from cliente as c
-inner join email_cliente as ec on c.id = id_cliente;
+if __name__ == '__main__':
+    app.run(debug=True)
 
-select * from pedido
-where year(data) between 2010 and 2014
-order by data asc;
-
-select * from pedido as p
-inner join cliente as c on p.id_cliente = c.id
-where year(data) between 2015 and 2016;
-
-select distinct nome from categoria 
-where nome like 'f%'
-order by nome desc;
-
-select * from produto as p
-inner join categoria as c on p.id_categoria = c.id
-where nome = 'Vestuário';
-
-select nome, sum(estoque) total from categoria as c
-inner join produto as p on c.id = p.id_categoria
-group by nome;
